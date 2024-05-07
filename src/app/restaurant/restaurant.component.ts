@@ -70,8 +70,9 @@ export class RestaurantComponent {
       emailjs.init('jggSFPMdkl4BCjhDL');
       emailjs
         .send('service_ia3gtut', 'template_fgaaexp',{
-          to_name:"Omar",
-          from_name:"opop1omar@gmail.com",
+          to_name:" admin",
+          from_name:"system",
+         to_email: 'swproj2024@gmail.com',
           subject: `update in your number of seats in ${updatedRes.name} `,
           message:`your new number of seats at ${slot.time} is ${slot.seats}`,
         })
