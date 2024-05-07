@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { restaurant } from './../models/restaurant';
 import { DBService } from './../services/db.service';
+import emailjs from '@emailjs/browser';
+
 
 @Component({
   selector: 'app-restaurant',
@@ -65,6 +67,22 @@ export class RestaurantComponent {
       }
 
       // Update the seat count in the database
+      emailjs.init('jggSFPMdkl4BCjhDL');
+      emailjs
+        .send('service_ia3gtut', 'template_fgaaexp',{
+          to_name:"Omar",
+          from_name:"opop1omar@gmail.com",
+          subject: `update in your number of seats in ${updatedRes.name} `,
+          message:`your new number of seats at ${slot.time} is ${slot.seats}`,
+        })
+        .then(
+          (response) => {
+            console.log('SUCCESS!', response.status, response.text);
+          },
+          (err) => {
+            console.log('FAILED...', err);
+          },
+        );
       this.db.updateRestaurant(this.resid, updatedRes)
         .then(() => {
           console.log('Seats saved successfully for time slot:', time);
